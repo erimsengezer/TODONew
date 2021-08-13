@@ -21,6 +21,8 @@
 		FA70DF8826C29044006CC1E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA70DF8626C29044006CC1E1 /* LaunchScreen.storyboard */; };
 		FA70DF9326C29044006CC1E1 /* TodoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70DF9226C29044006CC1E1 /* TodoAppTests.swift */; };
 		FA70DF9E26C29044006CC1E1 /* TodoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70DF9D26C29044006CC1E1 /* TodoAppUITests.swift */; };
+		FAD77A6B26C680800074901D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77A6A26C680800074901D /* LoginViewController.swift */; };
+		FAD77A7426C692A90074901D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77A7326C692A90074901D /* RegisterViewController.swift */; };
 		FAEA655E26C2AC4E00B5DF46 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEA655D26C2AC4E00B5DF46 /* MainTabBarController.swift */; };
 		FAEA656826C2AC5D00B5DF46 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEA656526C2AC5C00B5DF46 /* UIColor+Ext.swift */; };
 		FAEA656926C2AC5D00B5DF46 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEA656626C2AC5C00B5DF46 /* UIImageView+Ext.swift */; };
@@ -71,6 +73,8 @@
 		FA70DF9926C29044006CC1E1 /* TodoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA70DF9D26C29044006CC1E1 /* TodoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppUITests.swift; sourceTree = "<group>"; };
 		FA70DF9F26C29044006CC1E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD77A6A26C680800074901D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FAD77A7326C692A90074901D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FAEA655D26C2AC4E00B5DF46 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FAEA656526C2AC5C00B5DF46 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		FAEA656626C2AC5C00B5DF46 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
@@ -200,6 +204,22 @@
 			path = TodoAppUITests;
 			sourceTree = "<group>";
 		};
+		FAD77A6926C680700074901D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FAD77A6A26C680800074901D /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FAD77A7226C6928B0074901D /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				FAD77A7326C692A90074901D /* RegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		FAEA651726C2A99D00B5DF46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +283,8 @@
 		FAEA652D26C2AA3000B5DF46 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FAD77A7226C6928B0074901D /* Register */,
+				FAD77A6926C680700074901D /* Login */,
 				FA6314C426C2B01C00B044ED /* Base */,
 				FA6314B626C2AF2700B044ED /* Splash */,
 			);
@@ -506,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD77A6B26C680800074901D /* LoginViewController.swift in Sources */,
 				FAEA656926C2AC5D00B5DF46 /* UIImageView+Ext.swift in Sources */,
 				FA6314C826C2B01C00B044ED /* BaseViewModel.swift in Sources */,
 				FAEA656826C2AC5D00B5DF46 /* UIColor+Ext.swift in Sources */,
@@ -515,6 +538,7 @@
 				FA6314C726C2B01C00B044ED /* BaseViewController.swift in Sources */,
 				FA6314BD26C2B00300B044ED /* Coordinator.swift in Sources */,
 				FAEA656A26C2AC5D00B5DF46 /* UIImage+Ext.swift in Sources */,
+				FAD77A7426C692A90074901D /* RegisterViewController.swift in Sources */,
 				FA70DF7E26C29042006CC1E1 /* SceneDelegate.swift in Sources */,
 				FA6314B826C2AF2700B044ED /* SplashViewController.swift in Sources */,
 			);

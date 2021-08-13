@@ -33,7 +33,7 @@ class SplashViewController: UIViewController {
     private let labelLogoBottom: UILabel = {
         let label = UILabel()
         label.text = "Simple Task Manager"
-        label.font = UIFont(name: "Avenir Book", size: 12)
+        label.font = UIFont(name: "Avenir-Book", size: 12)
         label.textColor = Color.secondary
         return label
     }()
@@ -41,7 +41,7 @@ class SplashViewController: UIViewController {
     private let labelScreenBottom: UILabel = {
         let label = UILabel()
         label.text = "© 2021 Candy"
-        label.font = UIFont(name: "Avenir Book", size: 12)
+        label.font = UIFont(name: "Avenir-Book", size: 12)
         label.textColor = Color.secondary.withAlphaComponent(0.5)
         return label
     }()
