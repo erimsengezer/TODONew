@@ -108,14 +108,45 @@ class LoginViewController: UIViewController {
     
     private let viewLoginContent: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
         return view
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        buttonLogin.addTarget(self, action: #selector(buttonLoginAction), for: .touchUpInside)
+    }
+    
+    @objc func buttonLoginAction() {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.primary
         layout()
+        addGesture()
+        textFieldDelegate()
+    }
+    
+    private func textFieldDelegate() {
+        textFieldEmail.delegate = self
+        textFieldPassword.delegate = self
+    }
+    
+    private func addGesture() {
+        view.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(endEditingGesture))
+        view.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func endEditingGesture() {
+        view.endEditing(true)
+        UIView.animate(withDuration: 0.3) {
+            self.viewLoginContent.snp.updateConstraints { (maker) in
+                maker.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func layout(){
@@ -126,7 +157,9 @@ class LoginViewController: UIViewController {
         viewLoginContent.snp.makeConstraints { (make) in
             make.leading.equalTo(safeArea).offset(32)
             make.trailing.equalTo(safeArea).offset(-32)
-            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-50)
+            make.width.height.equalTo(200)
         }
         
         view.addSubview(labelPageTitle)
@@ -175,5 +208,16 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(viewLoginContent)
         }
         
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3) {
+            self.viewLoginContent.snp.updateConstraints { (maker) in
+                maker.centerY.equalToSuperview().offset(-200)
+            }
+            self.view.layoutIfNeeded()
+        }
     }
 }
