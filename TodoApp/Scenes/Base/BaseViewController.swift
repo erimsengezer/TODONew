@@ -8,8 +8,6 @@
 import UIKit
 
 class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
-
-    var coordinator: CoordinatorProtocol?
     
     var viewModel: ViewModel = ViewModel()
     
@@ -18,21 +16,15 @@ class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // layout func
-        //bind func
+        setupUI()
         layout()
-        bindViewModel()
+        bind()
     }
     
-    func layout(){
-        
-    }
+    func setupUI() {}
     
-    func bindViewModel(){
-        
-    }
+    func layout() {}
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    func bind() {}
+    
 }

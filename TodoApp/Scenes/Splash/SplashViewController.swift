@@ -5,6 +5,7 @@
 //  Created by ALEMDAR on 10.08.2021.
 //
 
+import UIKit
 import SnapKit
 
 class SplashViewController: UIViewController {
@@ -33,7 +34,7 @@ class SplashViewController: UIViewController {
     private let labelLogoBottom: UILabel = {
         let label = UILabel()
         label.text = "Simple Task Manager"
-        label.font = UIFont(name: "Avenir Book", size: 12)
+        label.font = UIFont(name: "Avenir-Book", size: 12)
         label.textColor = Color.secondary
         return label
     }()
@@ -41,7 +42,7 @@ class SplashViewController: UIViewController {
     private let labelScreenBottom: UILabel = {
         let label = UILabel()
         label.text = "© 2021 Candy"
-        label.font = UIFont(name: "Avenir Book", size: 12)
+        label.font = UIFont(name: "Avenir-Book", size: 12)
         label.textColor = Color.secondary.withAlphaComponent(0.5)
         return label
     }()
@@ -53,11 +54,27 @@ class SplashViewController: UIViewController {
         return progressView
     }()
     
+    private let completionHandler: (() -> Void)?
+        
+    init(completionHandler: (() -> Void)?) {
+        self.completionHandler = completionHandler
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.primary
+        setupUI()
         layout()
+        self.completionHandler?()
+    }
+    
+    private func setupUI(){
+        view.backgroundColor = Color.primary
     }
     
     private func layout() {
