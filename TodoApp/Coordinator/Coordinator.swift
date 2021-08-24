@@ -5,13 +5,10 @@
 //  Created by ALEMDAR on 10.08.2021.
 //
 
-import Foundation
 import UIKit
 
-protocol CoordinatorProtocol {
-    
-    var childCoordinators: [CoordinatorProtocol] { get set }
-    var navigationController: UINavigationController { get set }
+protocol  Coordinator: class {
+    var navigationController: UINavigationController { get }
     
     func start()
 }

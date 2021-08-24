@@ -1,20 +1,33 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  TodoApp
 //
 //  Created by ALEMDAR on 13.08.2021.
 //
 
-import SnapKit
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: BaseViewController<RegisterViewModel> {
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    private let scrollViewContent: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     private let labelPageTitle: UILabel = {
         let label = UILabel()
         label.text = "REGISTER"
         label.textColor = Color.secondary
-        label.font = UIFont(name: "Avenir-Black", size: 14)
+        label.font = UIFont(name: Font.Avenir.black, size: 14)
         label.attributedText = NSAttributedString(string: label.text ?? "", attributes: [.kern : 4])
         return label
     }()
@@ -23,15 +36,20 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Email"
         label.textColor = Color.secondary
-        label.font = UIFont(name: "Avenir-Book", size: 12)
+        label.font = UIFont(name: Font.Avenir.book, size: 12)
         return label
     }()
     
     private let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.font = UIFont(name: "Avenir-Book", size: 12)
+        textField.font = UIFont(name: Font.Avenir.book, size: 12)
         textField.layer.cornerRadius = 8
+        textField.leftViewMode = .always
+        textField.rightViewMode = .always
+        let spacingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+        textField.leftView = spacingView
+        textField.rightView = spacingView
         return textField
     }()
     
@@ -46,15 +64,21 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Password"
         label.textColor = Color.secondary
-        label.font = UIFont(name: "Avenir-Book", size: 12)
+        label.font = UIFont(name: Font.Avenir.book, size: 12)
         return label
     }()
     
     private let textFieldPassword: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.font = UIFont(name: "Avenir-Book", size: 12)
+        textField.font = UIFont(name: Font.Avenir.book, size: 12)
         textField.layer.cornerRadius = 8
+        textField.isSecureTextEntry = true
+        textField.leftViewMode = .always
+        textField.rightViewMode = .always
+        let spacingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+        textField.leftView = spacingView
+        textField.rightView = spacingView
         return textField
     }()
     
@@ -69,15 +93,21 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Confirm Password"
         label.textColor = Color.secondary
-        label.font = UIFont(name: "Avenir-Book", size: 12)
+        label.font = UIFont(name: Font.Avenir.book, size: 12)
         return label
     }()
     
     private let textFieldConfirmPassword: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.font = UIFont(name: "Avenir-Book", size: 12)
+        textField.font = UIFont(name: Font.Avenir.book, size: 12)
         textField.layer.cornerRadius = 8
+        textField.isSecureTextEntry = true
+        textField.leftViewMode = .always
+        textField.rightViewMode = .always
+        let spacingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+        textField.leftView = spacingView
+        textField.rightView = spacingView
         return textField
     }()
     
@@ -88,50 +118,126 @@ class RegisterViewController: UIViewController {
         return stackView
     }()
     
-    private let stackViewLogin: UIStackView = {
+    private let stackViewRegister: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
         return stackView
     }()
     
-    private let buttonLogin: UIButton = {
+    private let buttonRegister: UIButton = {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
         button.backgroundColor = Color.secondary
-        button.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 14)
+        button.titleLabel?.font = UIFont(name: Font.Avenir.heavy, size: 14)
         button.tintColor = .white
         button.layer.cornerRadius = 8
         return button
     }()
     
-    private let labelRegister: UILabel = {
+    private let labelTermsAndPolicies: UILabel = {
         let label = UILabel()
+        label.text = """
+                By registering, you automatically accept the Terms & Policies of candy app.
+            """
         label.textColor = Color.secondary
-        label.font = UIFont(name: "Avenir-Heavy", size: 14)
-        label.attributedText = NSAttributedString(string: "Have account? Log In", attributes: [.underlineStyle: 1])
+        label.font = UIFont(name: Font.Avenir.book, size: 12)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
-    private let viewLoginContent: UIView = {
+    private let labelLogin: UILabel = {
+        let label = UILabel()
+        label.textColor = Color.secondary
+        label.font = UIFont(name: Font.Avenir.heavy, size: 14)
+        label.attributedText = NSAttributedString(string: "Have account? Log In", attributes: [.underlineStyle: 1])
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+    
+    private let viewRegisterContent: UIView = {
         let view = UIView()
         return view
     }()
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Color.primary
-        layout()
+        
+        setupUI()
+        addGesture()
     }
     
-    private func layout(){
+    override func setupUI(){
+        view.backgroundColor = Color.primary
+    }
+    
+    override func bind(){
+
+        textFieldEmail.rx.text.map{ $0 ?? "" }.bind(to: viewModel.emailFieldViewModel.value).disposed(by: disposeBag)
+        textFieldPassword.rx.text.map{ $0 ?? "" }.bind(to: viewModel.passwordFieldViewModel.value).disposed(by: disposeBag)
+        textFieldConfirmPassword.rx.text.map{ $0 ?? "" }.bind(to: viewModel.repasswordFieldViewModel.value).disposed(by: disposeBag)
+                
+        buttonRegister.rx.tap.subscribe(onNext: {
+            if self.viewModel.isValidForm() {
+                self.viewModel.register()
+                if self.viewModel.isSuccess.value {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                self.viewModel.showAlert()
+            }
+        }).disposed(by: disposeBag)
+    }
+    
+    private func addGesture(){
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(endEditingGesture))
+        view.addGestureRecognizer(gesture)
         
-        let safeArea = view.safeAreaLayoutGuide
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelLoginTapped))
+        labelLogin.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func endEditingGesture(){
+        view.endEditing(true)
+    }
+    
+    @objc private func labelLoginTapped(){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func layout(){
         
-        view.addSubview(labelPageTitle)
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.top.leading.bottom.trailing.equalTo(safeArea)
+        }
+        
+        scrollView.addSubview(scrollViewContent)
+        scrollViewContent.snp.makeConstraints { (make) in
+            make.top.leading.equalTo(scrollView)
+            make.bottom.equalTo(scrollView)
+            make.trailing.equalTo(scrollView)
+            make.height.equalTo(view).priority(250)
+            make.width.equalTo(view)
+        }
+        
+        scrollViewContent.addSubview(labelPageTitle)
         labelPageTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(safeArea).offset(33)
-            make.centerX.equalTo(safeArea)
+            make.top.equalTo(scrollViewContent).offset(32)
+            make.centerX.equalTo(scrollViewContent)
+        }
+        
+        scrollViewContent.addSubview(viewRegisterContent)
+        viewRegisterContent.snp.makeConstraints { (make) in
+            make.top.equalTo(labelPageTitle.snp.bottom).offset(50)
+            make.leading.equalTo(scrollViewContent).offset(32)
+            make.trailing.equalTo(scrollViewContent).offset(-32)
+            make.bottom.equalTo(scrollViewContent)
         }
         
         stackViewEmail.addArrangedSubview(labelEmail)
@@ -152,36 +258,35 @@ class RegisterViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        stackViewLogin.addArrangedSubview(stackViewEmail)
-        stackViewLogin.addArrangedSubview(stackViewPassword)
-        stackViewLogin.addArrangedSubview(stackViewConfirmPassword)
+        stackViewRegister.addArrangedSubview(stackViewEmail)
+        stackViewRegister.addArrangedSubview(stackViewPassword)
+        stackViewRegister.addArrangedSubview(stackViewConfirmPassword)
         
-        viewLoginContent.addSubview(stackViewLogin)
-        stackViewLogin.snp.makeConstraints { (make) in
-            make.centerY.equalTo(viewLoginContent.snp.centerY)
-            make.leading.equalTo(viewLoginContent)
-            make.trailing.equalTo(viewLoginContent)
+        viewRegisterContent.addSubview(stackViewRegister)
+        stackViewRegister.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalTo(viewRegisterContent)
         }
         
-        viewLoginContent.addSubview(buttonLogin)
-        buttonLogin.snp.makeConstraints { (make) in
-            make.top.equalTo(stackViewLogin.snp.bottom).offset(40)
-            make.leading.equalTo(viewLoginContent)
-            make.trailing.equalTo(viewLoginContent)
+        viewRegisterContent.addSubview(buttonRegister)
+        buttonRegister.snp.makeConstraints { (make) in
+            make.top.equalTo(stackViewRegister.snp.bottom).offset(40)
+            make.leading.equalTo(viewRegisterContent)
+            make.trailing.equalTo(viewRegisterContent)
             make.height.equalTo(50)
         }
         
-        viewLoginContent.addSubview(labelRegister)
-        labelRegister.snp.makeConstraints { (make) in
-            make.top.equalTo(buttonLogin.snp.bottom).offset(40)
-            make.centerX.equalTo(viewLoginContent)
+        viewRegisterContent.addSubview(labelTermsAndPolicies)
+        labelTermsAndPolicies.snp.makeConstraints { (make) in
+            make.top.equalTo(buttonRegister.snp.bottom).offset(40)
+            make.leading.equalTo(viewRegisterContent).offset(60)
+            make.trailing.equalTo(viewRegisterContent).offset(-60)
         }
         
-        view.addSubview(viewLoginContent)
-        viewLoginContent.snp.makeConstraints { (make) in
-            make.leading.equalTo(safeArea).offset(32)
-            make.trailing.equalTo(safeArea).offset(-32)
-            make.center.equalTo(safeArea)
+        viewRegisterContent.addSubview(labelLogin)
+        labelLogin.snp.makeConstraints { (make) in
+            make.top.equalTo(labelTermsAndPolicies.snp.bottom).offset(40)
+            make.centerX.equalTo(viewRegisterContent)
         }
+        
     }
 }

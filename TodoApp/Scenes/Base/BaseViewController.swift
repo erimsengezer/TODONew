@@ -8,8 +8,6 @@
 import UIKit
 
 class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
-
-    var coordinator: CoordinatorProtocol?
     
     var viewModel: ViewModel = ViewModel()
     
@@ -18,18 +16,15 @@ class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // layout func
-        //bind func
+        setupUI()
         layout()
-        bindViewModel()
+        bind()
     }
     
-    func layout(){
-        
-    }
+    func setupUI() {}
     
-    func bindViewModel(){
-        
-    }
+    func layout() {}
+    
+    func bind() {}
     
 }

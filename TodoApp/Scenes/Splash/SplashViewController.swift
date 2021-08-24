@@ -5,6 +5,7 @@
 //  Created by ALEMDAR on 10.08.2021.
 //
 
+import UIKit
 import SnapKit
 
 class SplashViewController: UIViewController {
@@ -53,11 +54,27 @@ class SplashViewController: UIViewController {
         return progressView
     }()
     
+    private let completionHandler: (() -> Void)?
+        
+    init(completionHandler: (() -> Void)?) {
+        self.completionHandler = completionHandler
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.primary
+        setupUI()
         layout()
+        self.completionHandler?()
+    }
+    
+    private func setupUI(){
+        view.backgroundColor = Color.primary
     }
     
     private func layout() {
