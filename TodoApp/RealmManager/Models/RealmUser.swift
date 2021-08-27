@@ -10,6 +10,6 @@ import RealmSwift
 
 class RealmUser: Object {
     @Persisted(primaryKey: true) var id: Int
-    @Persisted var email: String?
-    @Persisted var password: String?
+    @Persisted var email: String
+    @Persisted var password: String
 }

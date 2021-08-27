@@ -32,6 +32,21 @@ extension UIImage {
             return nil
         }
     }
+    
+    func createSelectionIndicator(color: UIColor, size: CGSize, lineWidth: CGFloat) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        color.setFill()
+        
+        UIRectFill(CGRect(x: 0, y: size.height-lineWidth, width: size.width, height: lineWidth))
+        
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+        
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
 
 }
 

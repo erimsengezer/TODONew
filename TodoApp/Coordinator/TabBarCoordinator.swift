@@ -9,12 +9,6 @@ import UIKit
 
 class TabBarCoordinator: Coordinator {
     
-    private enum Constants {
-        enum Color {
-            static let tabBarTintColor: UIColor = UIColor(red: 255 / 255, green: 100 / 255, blue: 0 / 255, alpha: 1)
-        }
-    }
-    
     var navigationController: UINavigationController
     let tabBarController: UITabBarController
     
@@ -29,13 +23,20 @@ class TabBarCoordinator: Coordinator {
     
     func start() {
         homeCoordinator.start()
-        
         let controllers: [UIViewController] = [
             homeCoordinator.navigationController
         ]
         
+        setupUI()
         tabBarController.setViewControllers(controllers, animated: false)
     }
     
-    
+    private func setupUI(){
+        
+        let tabBar = tabBarController.tabBar
+        tabBar.tintColor = Color.secondary
+        tabBar.barTintColor = Color.primary
+        tabBar.selectionIndicatorImage = UIImage().createSelectionIndicator(color: Color.secondary, size: CGSize(width: tabBar.frame.width/1, height: tabBar.frame.height), lineWidth: 4.0)
+    }
+
 }
