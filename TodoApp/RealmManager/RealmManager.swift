@@ -23,4 +23,22 @@ class RealmManager {
         
     }
     
+    
+    func fetchAllTasks() -> [RealmTask]? {
+        return realm?.objects(RealmTask.self).toArray(ofType: RealmTask.self)
+    }
+    
+    func fetchTodayTasks() -> [RealmTask]? {
+        
+        let todayStart = Calendar.current.startOfDay(for: Date())
+        let todayEnd: Date = {
+            let components = DateComponents(day: 1, second: -1)
+            guard let date = Calendar.current.date(byAdding: components, to: todayStart) else { return Date() }
+            return date
+        }()
+        
+        return realm?.objects(RealmTask.self).filter("date BETWEEN %@", [todayStart, todayEnd]).toArray(ofType: RealmTask.self)
+
+    }
+    
 }
