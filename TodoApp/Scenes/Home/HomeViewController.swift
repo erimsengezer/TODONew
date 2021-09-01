@@ -192,7 +192,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         filteredTasks.subscribe(onNext: { tasks in
             if tasks.count == 0 {
                 self.tableViewTasks.layoutIfNeeded()
-                self.tableViewTasks.setEmptyImage("no-results")
+                self.tableViewTasks.setEmptyImage("no-tasks")
             }else {
                 self.tableViewTasks.removeEmptyImage()
             }
