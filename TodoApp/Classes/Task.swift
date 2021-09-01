@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-enum TaskPriority: String {
+enum TaskPriority: String, CaseIterable {
     case low = "low"
     case medium = "medium"
     case high = "high"
