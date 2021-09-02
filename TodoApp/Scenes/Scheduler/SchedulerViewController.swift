@@ -1,16 +1,17 @@
 //
-//  HomeViewController.swift
+//  SchedulerViewController.swift
 //  TodoApp
 //
-//  Created by ALEMDAR on 18.08.2021.
+//  Created by ALEMDAR on 27.08.2021.
 //
 
 import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
-class HomeViewController: BaseViewController<HomeViewModel> {
+class SchedulerViewController: BaseViewController<SchedulerViewModel> {
     
     private enum Constants {
         enum TableViewTasks {
@@ -26,7 +27,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     
     private let labelTopTitle: UILabel = {
         let label = UILabel()
-        label.text = "Today's list —"
+        label.text = "Upcoming tasks —"
         label.numberOfLines = 0
         label.textColor = Color.secondary
         label.font = UIFont(name: Font.Avenir.black, size: 24)
@@ -36,7 +37,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     private let tableViewTasks: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 32, left: 0, bottom: 32, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
         tableView.rowHeight = Constants.TableViewTasks.height
         return tableView
     }()
@@ -70,13 +71,27 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         return textField
     }()
     
+    private let viewSearchTasks: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let tableViewSearchTasks: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
+        tableView.rowHeight = Constants.TableViewTasks.height
+        return tableView
+    }()
+    
     private enum SearchBarState {
         case opened
         case closed
     }
     
-    private var searchBarState: SearchBarState = .closed
     private let disposeBag = DisposeBag()
+    private var searchBarState: SearchBarState = .closed
+    private var dataSource: RxTableViewSectionedReloadDataSource<SchedulerSection>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +100,8 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.load()
+        viewModel.loadTasks()
+        viewModel.loadTasksByDate()
     }
     
     override func setupUI() {
@@ -111,16 +127,17 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         
         DispatchQueue.main.async {
             self.viewSearch.frame.origin.x = self.view.frame.width
+            self.viewSearchTasks.frame.origin.y = self.view.frame.height
         }
     }
     
-    @objc func openMenu(){
+    @objc private func openMenu(){
         let menuVC = MenuViewController()
         menuVC.modalPresentationStyle = .overFullScreen
         present(menuVC, animated: false, completion: nil)
     }
     
-    @objc func openSearchBar(){
+    @objc private func openSearchBar(){
         switch searchBarState {
         case .closed:
             animateToOpenSearchBar()
@@ -133,6 +150,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     private func animateToOpenSearchBar(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut) {
             self.viewSearch.frame.origin.x = 0
+            self.viewSearchTasks.frame.origin.y = 70
         } completion: { done in
             if done {
                 self.searchBarState = .opened
@@ -148,6 +166,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut) {
                 self.viewSearch.frame.origin.x = self.view.frame.width
+                self.viewSearchTasks.frame.origin.y = self.view.frame.height
             } completion: { done in
                 if done {
                     self.searchBarState = .closed
@@ -158,10 +177,39 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     }
     
     private func configureTableView(){
+        tableViewTasks.rx.setDelegate(self).disposed(by: disposeBag)
         tableViewTasks.register(cellType: TaskTableViewCell.self)
+        tableViewTasks.register(SchedulerHeader.self, forHeaderFooterViewReuseIdentifier: "schedulerHeader")
+        
+        tableViewSearchTasks.rx.setDelegate(self).disposed(by: disposeBag)
+        tableViewSearchTasks.register(cellType: TaskTableViewCell.self)
     }
     
     override func bind() {
+        
+        // Create a datasource to bind with the tableView
+        dataSource = RxTableViewSectionedReloadDataSource<SchedulerSection> { (dataSource, tableView, indexPath, taskItem) -> UITableViewCell in
+            
+            let cell = tableView.dequeCell(cellType: TaskTableViewCell.self, indexPath: indexPath)
+        
+            cell.configure(task: taskItem)
+            
+            return cell
+        }
+        
+        guard let dataSource = dataSource else { return }
+
+        viewModel.taskSections.bind(to: tableViewTasks.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        
+        
+        // Change the task status by selecting a task
+        tableViewTasks.rx.itemSelected.subscribe(onNext: { indexPath in
+            
+            guard let cell = self.tableViewTasks.cellForRow(at: indexPath) as? TaskTableViewCell else { return }
+        
+            cell.toggleTaskStatus()
+            
+        }).disposed(by: disposeBag)
         
         // Filter tasks by searched text
         let searchedText = textFieldSearch.rx.text
@@ -170,31 +218,43 @@ class HomeViewController: BaseViewController<HomeViewModel> {
             if let text = text, !text.isEmpty {
                 return tasks.filter { $0.name.lowercased().contains(text.lowercased()) }
             }
-            return tasks
+            return []
         }
         
-        filteredTasks.bind(to: tableViewTasks.rx.items(cellIdentifier: TaskTableViewCell.identifier, cellType: TaskTableViewCell.self)) { row, model, cell in
+        filteredTasks.bind(to: tableViewSearchTasks.rx.items(cellIdentifier: TaskTableViewCell.identifier, cellType: TaskTableViewCell.self)) { row, model, cell in
             cell.configure(task: model)
         }.disposed(by: disposeBag)
         
         
         // Change task status by selecting a task
-        tableViewTasks.rx.itemSelected.subscribe(onNext: { indexPath in
+        tableViewSearchTasks.rx.itemSelected.subscribe(onNext: { indexPath in
             
-            guard let cell = self.tableViewTasks.cellForRow(at: indexPath) as? TaskTableViewCell else {
+            guard let cell = self.tableViewSearchTasks.cellForRow(at: indexPath) as? TaskTableViewCell else {
                 return
             }
+            
             cell.toggleTaskStatus()
+            
+            self.viewModel.loadTasksByDate()
             
         }).disposed(by: disposeBag)
         
-        // Set an empty state
-        filteredTasks.subscribe(onNext: { tasks in
-            if tasks.count == 0 {
+        // Set an empty state to tableViews
+        viewModel.taskSections.subscribe(onNext: { sections in
+            if sections.count == 0 {
                 self.tableViewTasks.layoutIfNeeded()
                 self.tableViewTasks.setEmptyImage("no-tasks")
             }else {
                 self.tableViewTasks.removeEmptyImage()
+            }
+        }).disposed(by: disposeBag)
+        
+        filteredTasks.subscribe(onNext: { tasks in
+            if tasks.count == 0 {
+                self.tableViewSearchTasks.layoutIfNeeded()
+                self.tableViewSearchTasks.setEmptyImage("no-results")
+            }else {
+                self.tableViewSearchTasks.removeEmptyImage()
             }
         }).disposed(by: disposeBag)
         
@@ -211,7 +271,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         labelTopTitle.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().offset(32)
             make.bottom.equalToSuperview().offset(-32)
-            make.width.equalTo(100)
+            make.width.equalTo(120)
         }
         
         view.addSubview(tableViewTasks)
@@ -233,7 +293,34 @@ class HomeViewController: BaseViewController<HomeViewModel> {
             make.height.equalTo(40)
         }
         
+        view.addSubview(viewSearchTasks)
+        viewSearchTasks.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(72)
+            make.leading.bottom.trailing.equalToSuperview()
+        }
+        
+        viewSearchTasks.addSubview(tableViewSearchTasks)
+        tableViewSearchTasks.snp.makeConstraints { (make) in
+            make.top.leading.bottom.trailing.equalToSuperview()
+        }
+        
     }
     
-    
+}
+
+extension SchedulerViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "schedulerHeader") as? SchedulerHeader else {
+            return UIView()
+        }
+        
+        guard let dataSource = dataSource else { return UIView() }
+        
+        view.configure(title: dataSource.sectionModels[section].header)
+        
+        return view
+    }
+
 }

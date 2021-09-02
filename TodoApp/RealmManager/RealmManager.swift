@@ -41,4 +41,41 @@ class RealmManager {
 
     }
     
+    func fetchTasksByDate() -> [Date: Results<RealmTask>]{
+        
+        var groupedItems = [Date:Results<RealmTask>]()
+        var itemDates = [Date]()
+        
+        let items = realm?.objects(RealmTask.self)
+        
+        guard let myitems = items else { return [:] }
+        
+        itemDates = myitems.reduce(into: [Date](), { results, currentItem in
+            
+            let date = currentItem.date
+            let beginningOfDay = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date), month: Calendar.current.component(.month, from: date), day: Calendar.current.component(.day, from: date), hour: 0, minute: 0, second: 0))!
+            let endOfDay = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date), month: Calendar.current.component(.month, from: date), day: Calendar.current.component(.day, from: date), hour: 23, minute: 59, second: 59))!
+                        
+            if !results.contains(where: { addedDate -> Bool in
+                return addedDate >= beginningOfDay && addedDate <= endOfDay
+            }) {
+                results.append(beginningOfDay)
+            }
+            
+        })
+        
+        //Filter each Item in realm based on their date property and assign the results to the dictionary
+        groupedItems = itemDates.reduce(into: [Date:Results<RealmTask>](), { results, date in
+            
+            let beginningOfDay = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date), month: Calendar.current.component(.month, from: date), day: Calendar.current.component(.day, from: date), hour: 0, minute: 0, second: 0))!
+            
+            let endOfDay = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date), month: Calendar.current.component(.month, from: date), day: Calendar.current.component(.day, from: date), hour: 23, minute: 59, second: 59))!
+            
+            results[beginningOfDay] = realm?.objects(RealmTask.self).filter("date >= %@ AND date <= %@", beginningOfDay, endOfDay)
+            
+        })
+        
+        return groupedItems
+    }
+    
 }

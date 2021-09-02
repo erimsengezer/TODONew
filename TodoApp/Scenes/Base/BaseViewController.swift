@@ -27,4 +27,11 @@ class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
     
     func bind() {}
     
+    func hideTabBar(){
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    func showTabBar(){
+        tabBarController?.tabBar.isHidden = false
+    }
 }

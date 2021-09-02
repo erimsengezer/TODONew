@@ -10,5 +10,5 @@ import UIKit
 enum Color {
     static let primary: UIColor = UIColor.rgba(red: 255, green: 238, blue: 238, alpha: 1)
     static let secondary: UIColor = UIColor.rgba(red: 36, green: 59, blue: 107, alpha: 1)
-    static let lightGreen: UIColor = UIColor.rgba(red: 36, green: 59, blue: 107, alpha: 1)
+    static let lightGreen: UIColor = UIColor.rgba(red: 147, green: 255, blue: 223, alpha: 1)
 }

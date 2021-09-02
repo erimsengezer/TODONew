@@ -9,10 +9,19 @@
 /* Begin PBXBuildFile section */
 		FA0F2C6726D439BD005B825C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FA0F2C6626D439BD005B825C /* Realm */; };
 		FA0F2C6926D439BD005B825C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA0F2C6826D439BD005B825C /* RealmSwift */; };
+		FA1CDA6126DE1A960059E1D5 /* SchedulerTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1CDA6026DE1A960059E1D5 /* SchedulerTableViewHeaderFooterView.swift */; };
+		FA1CDA6A26DE224C0059E1D5 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = FA1CDA6926DE224C0059E1D5 /* RxDataSources */; };
+		FA1CDA7026DE22B70059E1D5 /* SchedulerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1CDA6F26DE22B70059E1D5 /* SchedulerSection.swift */; };
+		FA1CDA7E26DE431C0059E1D5 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1CDA7D26DE431C0059E1D5 /* NewTaskViewController.swift */; };
+		FA1CDA8626DE43260059E1D5 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1CDA8526DE43260059E1D5 /* NewTaskViewModel.swift */; };
+		FA1CDA8B26DE43640059E1D5 /* NewTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1CDA8A26DE43640059E1D5 /* NewTaskCoordinator.swift */; };
 		FA217B1326D62881003C62A5 /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA217B1226D62880003C62A5 /* UITableViewCell+Ext.swift */; };
 		FA217B1926D64527003C62A5 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA217B1826D64527003C62A5 /* MenuViewController.swift */; };
 		FA217BC926D78EBF003C62A5 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA217BC826D78EBF003C62A5 /* MenuTableViewCell.swift */; };
 		FA217BCE26D7BF32003C62A5 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA217BCD26D7BF32003C62A5 /* UITableView+Ext.swift */; };
+		FA48E2BC26D8FC9000FBABDA /* SchedulerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48E2BB26D8FC9000FBABDA /* SchedulerViewController.swift */; };
+		FA48E2C426D8FC9C00FBABDA /* SchedulerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48E2C326D8FC9C00FBABDA /* SchedulerViewModel.swift */; };
+		FA48E2C926D8FD2100FBABDA /* SchedulerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48E2C826D8FD2100FBABDA /* SchedulerCoordinator.swift */; };
 		FA6314B226C2AEE900B044ED /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6314B126C2AEE900B044ED /* Color.swift */; };
 		FA70DF7C26C29042006CC1E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70DF7B26C29042006CC1E1 /* AppDelegate.swift */; };
 		FA70DF8826C29044006CC1E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA70DF8626C29044006CC1E1 /* LaunchScreen.storyboard */; };
@@ -82,10 +91,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA1CDA6026DE1A960059E1D5 /* SchedulerTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		FA1CDA6F26DE22B70059E1D5 /* SchedulerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerSection.swift; sourceTree = "<group>"; };
+		FA1CDA7D26DE431C0059E1D5 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		FA1CDA8526DE43260059E1D5 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
+		FA1CDA8A26DE43640059E1D5 /* NewTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskCoordinator.swift; sourceTree = "<group>"; };
 		FA217B1226D62880003C62A5 /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
 		FA217B1826D64527003C62A5 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		FA217BC826D78EBF003C62A5 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		FA217BCD26D7BF32003C62A5 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		FA48E2BB26D8FC9000FBABDA /* SchedulerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerViewController.swift; sourceTree = "<group>"; };
+		FA48E2C326D8FC9C00FBABDA /* SchedulerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerViewModel.swift; sourceTree = "<group>"; };
+		FA48E2C826D8FD2100FBABDA /* SchedulerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerCoordinator.swift; sourceTree = "<group>"; };
 		FA6314B126C2AEE900B044ED /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		FA70DF7826C29042006CC1E1 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA70DF7B26C29042006CC1E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +165,7 @@
 				FAEF4B4426D3DE7600EB7FDB /* SwiftMessages in Frameworks */,
 				FAEF4B3E26D3DB8800EB7FDB /* SnapKit in Frameworks */,
 				FADF832026CA95780044E9B1 /* RxSwift in Frameworks */,
+				FA1CDA6A26DE224C0059E1D5 /* RxDataSources in Frameworks */,
 				FADF832426CA95780044E9B1 /* RxCocoa in Frameworks */,
 				FADF832626CA95780044E9B1 /* RxBlocking in Frameworks */,
 			);
@@ -170,6 +188,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA1CDA5F26DE1A6B0059E1D5 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				FA1CDA6026DE1A960059E1D5 /* SchedulerTableViewHeaderFooterView.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		FA1CDA7C26DE43010059E1D5 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				FA1CDA7D26DE431C0059E1D5 /* NewTaskViewController.swift */,
+				FA1CDA8526DE43260059E1D5 /* NewTaskViewModel.swift */,
+			);
+			path = NewTask;
+			sourceTree = "<group>";
+		};
 		FA217B1726D64518003C62A5 /* LeftMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +213,16 @@
 				FAEB4E9126D8F45500CD5FCA /* MenuViewModel.swift */,
 			);
 			path = LeftMenu;
+			sourceTree = "<group>";
+		};
+		FA48E2BA26D8FC4800FBABDA /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				FA1CDA5F26DE1A6B0059E1D5 /* HeaderView */,
+				FA48E2BB26D8FC9000FBABDA /* SchedulerViewController.swift */,
+				FA48E2C326D8FC9C00FBABDA /* SchedulerViewModel.swift */,
+			);
+			path = Scheduler;
 			sourceTree = "<group>";
 		};
 		FA70DF6F26C29042006CC1E1 = {
@@ -209,6 +254,7 @@
 				FAEA652926C2AA0500B5DF46 /* Constants */,
 				FAEA652A26C2AA0E00B5DF46 /* Coordinator */,
 				FAEA652B26C2AA1900B5DF46 /* Extensions */,
+				FAB59DE226DEACB5004D8218 /* LocalModels */,
 				FAE2562926D450CB001AA7B3 /* RealmManager */,
 				FAEA652526C2A9EB00B5DF46 /* Resources */,
 				FAEA652D26C2AA3000B5DF46 /* Scenes */,
@@ -319,6 +365,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		FAB59DE226DEACB5004D8218 /* LocalModels */ = {
+			isa = PBXGroup;
+			children = (
+				FA1CDA6F26DE22B70059E1D5 /* SchedulerSection.swift */,
+			);
+			path = LocalModels;
+			sourceTree = "<group>";
+		};
 		FAD51C7A26D432C900FDB399 /* AlertManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +468,8 @@
 				FAA5A96B26D5A099000A74ED /* Coordinator.swift */,
 				FAA5A96826D5A099000A74ED /* HomeCoordinator.swift */,
 				FAA5A96926D5A099000A74ED /* TabBarCoordinator.swift */,
+				FA48E2C826D8FD2100FBABDA /* SchedulerCoordinator.swift */,
+				FA1CDA8A26DE43640059E1D5 /* NewTaskCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -436,6 +492,8 @@
 		FAEA652D26C2AA3000B5DF46 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FA1CDA7C26DE43010059E1D5 /* NewTask */,
+				FA48E2BA26D8FC4800FBABDA /* Scheduler */,
 				FA217B1726D64518003C62A5 /* LeftMenu */,
 				FAA5A9A626D5A153000A74ED /* Base */,
 				FAA5A9AB26D5A154000A74ED /* Home */,
@@ -471,6 +529,7 @@
 				FAEF4B4326D3DE7600EB7FDB /* SwiftMessages */,
 				FA0F2C6626D439BD005B825C /* Realm */,
 				FA0F2C6826D439BD005B825C /* RealmSwift */,
+				FA1CDA6926DE224C0059E1D5 /* RxDataSources */,
 			);
 			productName = TodoApp;
 			productReference = FA70DF7826C29042006CC1E1 /* TodoApp.app */;
@@ -548,6 +607,7 @@
 				FAEF4B3C26D3DB8800EB7FDB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FAEF4B4226D3DE7600EB7FDB /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				FA0F2C6526D439BD005B825C /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				FA1CDA6826DE224C0059E1D5 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = FA70DF7926C29042006CC1E1 /* Products */;
 			projectDirPath = "";
@@ -594,29 +654,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1CDA7026DE22B70059E1D5 /* SchedulerSection.swift in Sources */,
 				FAEA656926C2AC5D00B5DF46 /* UIImageView+Ext.swift in Sources */,
 				FA217B1326D62881003C62A5 /* UITableViewCell+Ext.swift in Sources */,
 				FAA5A9BB26D5A154000A74ED /* HomeViewModel.swift in Sources */,
+				FA1CDA8B26DE43640059E1D5 /* NewTaskCoordinator.swift in Sources */,
 				FADF82B526CA68BC0044E9B1 /* Font.swift in Sources */,
 				FAA5A9BC26D5A154000A74ED /* HomeViewController.swift in Sources */,
 				FAA5A96C26D5A099000A74ED /* HomeCoordinator.swift in Sources */,
 				FAA5A96326D59F9F000A74ED /* User.swift in Sources */,
 				FAA5A96D26D5A099000A74ED /* TabBarCoordinator.swift in Sources */,
+				FA1CDA6126DE1A960059E1D5 /* SchedulerTableViewHeaderFooterView.swift in Sources */,
 				FAA5A9C226D5A216000A74ED /* TaskTableViewCell.swift in Sources */,
 				FAA5A9B826D5A154000A74ED /* BaseViewController.swift in Sources */,
 				FAA5A9B026D5A154000A74ED /* LoginEmailViewModel.swift in Sources */,
 				FAA5A9B326D5A154000A74ED /* RegisterPasswordViewModel.swift in Sources */,
 				FA217BC926D78EBF003C62A5 /* MenuTableViewCell.swift in Sources */,
+				FA48E2BC26D8FC9000FBABDA /* SchedulerViewController.swift in Sources */,
 				FAA5A97426D5A0C8000A74ED /* Results+Ext.swift in Sources */,
 				FAEA656826C2AC5D00B5DF46 /* UIColor+Ext.swift in Sources */,
 				FAA5A9B126D5A154000A74ED /* FieldViewModel.swift in Sources */,
 				FA6314B226C2AEE900B044ED /* Color.swift in Sources */,
 				FAA5A9AE26D5A154000A74ED /* LoginViewModel.swift in Sources */,
 				FAA5A9B926D5A154000A74ED /* BaseViewModel.swift in Sources */,
+				FA1CDA7E26DE431C0059E1D5 /* NewTaskViewController.swift in Sources */,
+				FA48E2C426D8FC9C00FBABDA /* SchedulerViewModel.swift in Sources */,
 				FAA5A98826D5A11E000A74ED /* RealmTask.swift in Sources */,
 				FAA5A9B226D5A154000A74ED /* LoginViewController.swift in Sources */,
 				FAA3456C26CC78500090B1BF /* UIApplication+Ext.swift in Sources */,
+				FA48E2C926D8FD2100FBABDA /* SchedulerCoordinator.swift in Sources */,
 				FAA5A9B426D5A154000A74ED /* RegisterRePasswordViewModel.swift in Sources */,
+				FA1CDA8626DE43260059E1D5 /* NewTaskViewModel.swift in Sources */,
 				FAEB4E9226D8F45500CD5FCA /* MenuViewModel.swift in Sources */,
 				FA217BCE26D7BF32003C62A5 /* UITableView+Ext.swift in Sources */,
 				FA70DF7C26C29042006CC1E1 /* AppDelegate.swift in Sources */,
@@ -964,6 +1032,14 @@
 				minimumVersion = 10.12.0;
 			};
 		};
+		FA1CDA6826DE224C0059E1D5 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		FADF831E26CA95780044E9B1 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1000,6 +1076,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA0F2C6526D439BD005B825C /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		FA1CDA6926DE224C0059E1D5 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA1CDA6826DE224C0059E1D5 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		FADF831F26CA95780044E9B1 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
