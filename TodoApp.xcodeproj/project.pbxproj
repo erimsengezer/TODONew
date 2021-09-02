@@ -56,6 +56,9 @@
 		FAA5A9BB26D5A154000A74ED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5A9AC26D5A154000A74ED /* HomeViewModel.swift */; };
 		FAA5A9BC26D5A154000A74ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5A9AD26D5A154000A74ED /* HomeViewController.swift */; };
 		FAA5A9C226D5A216000A74ED /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5A9C126D5A216000A74ED /* TaskTableViewCell.swift */; };
+		FACC2B5126E0B41C00C172F7 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC2B5026E0B41C00C172F7 /* ProfileCoordinator.swift */; };
+		FACC2B5626E0B42B00C172F7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC2B5526E0B42B00C172F7 /* ProfileViewController.swift */; };
+		FACC2B5B26E0B43600C172F7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC2B5A26E0B43600C172F7 /* ProfileViewModel.swift */; };
 		FAD51C7626D431D600FDB399 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD51C7526D431D600FDB399 /* AlertManager.swift */; };
 		FADF82B526CA68BC0044E9B1 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF82B426CA68BC0044E9B1 /* Font.swift */; };
 		FADF82C026CA69EC0044E9B1 /* Avenir-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FADF82BF26CA69EC0044E9B1 /* Avenir-Heavy.ttf */; };
@@ -143,6 +146,9 @@
 		FAA5A9AC26D5A154000A74ED /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FAA5A9AD26D5A154000A74ED /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FAA5A9C126D5A216000A74ED /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		FACC2B5026E0B41C00C172F7 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		FACC2B5526E0B42B00C172F7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FACC2B5A26E0B43600C172F7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		FAD51C7526D431D600FDB399 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		FADF82B426CA68BC0044E9B1 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		FADF82BF26CA69EC0044E9B1 /* Avenir-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir-Heavy.ttf"; sourceTree = "<group>"; };
@@ -373,6 +379,15 @@
 			path = LocalModels;
 			sourceTree = "<group>";
 		};
+		FACC2B4926E0B3E900C172F7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FACC2B5526E0B42B00C172F7 /* ProfileViewController.swift */,
+				FACC2B5A26E0B43600C172F7 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		FAD51C7A26D432C900FDB399 /* AlertManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +485,7 @@
 				FAA5A96926D5A099000A74ED /* TabBarCoordinator.swift */,
 				FA48E2C826D8FD2100FBABDA /* SchedulerCoordinator.swift */,
 				FA1CDA8A26DE43640059E1D5 /* NewTaskCoordinator.swift */,
+				FACC2B5026E0B41C00C172F7 /* ProfileCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -492,6 +508,7 @@
 		FAEA652D26C2AA3000B5DF46 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FACC2B4926E0B3E900C172F7 /* Profile */,
 				FA1CDA7C26DE43010059E1D5 /* NewTask */,
 				FA48E2BA26D8FC4800FBABDA /* Scheduler */,
 				FA217B1726D64518003C62A5 /* LeftMenu */,
@@ -676,6 +693,7 @@
 				FAA5A9B126D5A154000A74ED /* FieldViewModel.swift in Sources */,
 				FA6314B226C2AEE900B044ED /* Color.swift in Sources */,
 				FAA5A9AE26D5A154000A74ED /* LoginViewModel.swift in Sources */,
+				FACC2B5626E0B42B00C172F7 /* ProfileViewController.swift in Sources */,
 				FAA5A9B926D5A154000A74ED /* BaseViewModel.swift in Sources */,
 				FA1CDA7E26DE431C0059E1D5 /* NewTaskViewController.swift in Sources */,
 				FA48E2C426D8FC9C00FBABDA /* SchedulerViewModel.swift in Sources */,
@@ -683,6 +701,7 @@
 				FAA5A9B226D5A154000A74ED /* LoginViewController.swift in Sources */,
 				FAA3456C26CC78500090B1BF /* UIApplication+Ext.swift in Sources */,
 				FA48E2C926D8FD2100FBABDA /* SchedulerCoordinator.swift in Sources */,
+				FACC2B5B26E0B43600C172F7 /* ProfileViewModel.swift in Sources */,
 				FAA5A9B426D5A154000A74ED /* RegisterRePasswordViewModel.swift in Sources */,
 				FA1CDA8626DE43260059E1D5 /* NewTaskViewModel.swift in Sources */,
 				FAEB4E9226D8F45500CD5FCA /* MenuViewModel.swift in Sources */,
@@ -690,6 +709,7 @@
 				FA70DF7C26C29042006CC1E1 /* AppDelegate.swift in Sources */,
 				FAA5A98926D5A11E000A74ED /* RealmUser.swift in Sources */,
 				FAA5A96F26D5A099000A74ED /* Coordinator.swift in Sources */,
+				FACC2B5126E0B41C00C172F7 /* ProfileCoordinator.swift in Sources */,
 				FAEA656A26C2AC5D00B5DF46 /* UIImage+Ext.swift in Sources */,
 				FA217B1926D64527003C62A5 /* MenuViewController.swift in Sources */,
 				FAD51C7626D431D600FDB399 /* AlertManager.swift in Sources */,

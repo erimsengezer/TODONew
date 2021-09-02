@@ -34,7 +34,7 @@ class LoginViewModel: BaseViewModel {
         if let user = user.getUser() {
             
             UserDefaults.standard.setIsLoggedIn(value: true)
-            UserDefaults.standard.setLoggedUserID(value: user.id ?? 0)
+            UserDefaults.standard.setLoggedUserID(value: user.id)
             
             AlertManager.shared.showAlert(layout: .messageView, type: .success, message: "Successfully logged in.")
             

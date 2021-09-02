@@ -114,13 +114,13 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         }
     }
     
-    @objc func openMenu(){
+    @objc private func openMenu(){
         let menuVC = MenuViewController()
         menuVC.modalPresentationStyle = .overFullScreen
         present(menuVC, animated: false, completion: nil)
     }
     
-    @objc func openSearchBar(){
+    @objc private func openSearchBar(){
         switch searchBarState {
         case .closed:
             animateToOpenSearchBar()

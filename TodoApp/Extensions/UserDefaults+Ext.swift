@@ -22,6 +22,10 @@ extension UserDefaults {
         return setValue(value, forKey: UserDefaultsKeys.isLoggedIn)
     }
     
+    func getLoggedUserID() -> Int {
+        return integer(forKey: UserDefaultsKeys.loggedUserID)
+    }
+    
     func setLoggedUserID(value: Int) {
         return setValue(value, forKey: UserDefaultsKeys.loggedUserID)
     }
