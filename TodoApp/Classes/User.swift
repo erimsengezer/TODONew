@@ -10,13 +10,18 @@ import RealmSwift
 
 class User {
     
-    var id: Int?
-    var email: String
-    var password: String
+    var id: Int = 0
+    var fullName: String = ""
+    var email: String = ""
+    var password: String = ""
+    var isNotificationOpen: Bool = false
+    var isVibrationOpen: Bool = false
     
     var realm: Realm? {
         return RealmManager.shared.realm
     }
+    
+    init() {}
     
     init(email: String, password: String) {
         self.email = email
@@ -48,6 +53,26 @@ class User {
             self.id = user.id
             return self
         }
+        
+        return nil
+        
+    }
+    
+    /*
+     Checks user credentials and if exists then returns itself otherwise nil
+     */
+    func getUserById(id: Int) -> User? {
+ 
+        let user = realm?.objects(RealmUser.self).filter("id == %@",id).first
+
+        if let user = user {
+            self.id = user.id
+            self.fullName = user.fullName
+            self.email = user.email
+            self.isNotificationOpen = user.isNotificationOpen
+            self.isVibrationOpen = user.isVibrationOpen
+            return self
+        }
         return nil
         
     }
@@ -77,6 +102,42 @@ class User {
             }
         }catch {
             print(error.localizedDescription)
+        }
+        
+    }
+    
+    func setIsVibrationOpen(state: Bool) {
+        
+        isVibrationOpen = state
+        
+        let user = realm?.objects(RealmUser.self).filter("id == %@",id).first
+        
+        if let user = user {
+            do {
+                try realm?.write {
+                    user.isVibrationOpen = state
+                }
+            }catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    func setIsNotificationOpen(state: Bool) {
+        
+        isNotificationOpen = state
+        
+        let user = realm?.objects(RealmUser.self).filter("id == %@",id).first
+        
+        if let user = user {
+            do {
+                try realm?.write {
+                    user.isNotificationOpen = state
+                }
+            }catch {
+                print(error.localizedDescription)
+            }
         }
         
     }
